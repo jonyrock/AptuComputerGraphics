@@ -20,8 +20,8 @@ int main(void) {
     glfwOpenWindowHint(GLFW_FSAA_SAMPLES, 4);
     glfwOpenWindowHint(GLFW_OPENGL_VERSION_MAJOR, 2);
     glfwOpenWindowHint(GLFW_OPENGL_VERSION_MINOR, 1);
-    
-    if (!glfwOpenWindow(500, 500, 0, 0, 0, 0, 32, 0, GLFW_WINDOW)) {
+     
+    if (!glfwOpenWindow(700, 600, 0, 0, 0, 0, 32, 0, GLFW_WINDOW)) {
         cerr << "Failed to open GLFW window." << endl;
         glfwTerminate();
         return -1;
@@ -38,20 +38,26 @@ int main(void) {
     
     glDepthFunc(GL_LESS);
     
+    // MVP init
+    float NEAR_CLIPPING_PLANE = 0.1f;
+    float FAR_CLIPPING_PLANE = 100.0f;
+    mat4 Projection = perspective(45.0f, 4.0f / 3.0f, NEAR_CLIPPING_PLANE, FAR_CLIPPING_PLANE);
+    mat4 View = lookAt(vec3(8, 6, -6), vec3(2, 0, 0), vec3(0, 1, 0));
+    mat4 Model = mat4(1.0f);
+    mat4 MVP = Projection * View * Model;
+    
     // GLSL init
     GLuint programId = LoadShaders("src/simple.vert", "src/simple.frag");
     GLuint mvpId = glGetUniformLocation(programId, "MVP");
     GLuint vertexColorId = glGetUniformLocation(programId, "vertexColor");
     GLuint vertexPosition_modelspaceID = glGetAttribLocation(programId, "vertexPosition_modelspace");
-    
+    GLuint isWireframeId = glGetUniformLocation(programId, "isWireframe");
+    GLuint nearClippingPlaneId = glGetUniformLocation(programId, "nearClippingPlaneId");
+    GLuint farClippingPlaneId = glGetUniformLocation(programId, "farClippingPlaneId");
     glUseProgram(programId);
     
-    
-    // MVP init
-    mat4 Projection = perspective(45.0f, 4.0f / 3.0f, 0.1f, 100.0f);
-    mat4 View = lookAt(vec3(8, 6, -6), vec3(2, 0, 0), vec3(0, 1, 0));
-    mat4 Model = mat4(1.0f);
-    mat4 MVP = Projection * View * Model;
+    glUniform1f(nearClippingPlaneId, NEAR_CLIPPING_PLANE);
+    glUniform1f(farClippingPlaneId, FAR_CLIPPING_PLANE);
     
     // Model init
     vector<vec3> vertices;
@@ -74,18 +80,16 @@ int main(void) {
         glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
         glVertexAttribPointer(vertexPosition_modelspaceID, 3, GL_FLOAT, GL_FALSE, 0, (void*) 0);
         
+        glUniform1f(isWireframeId, 1.0f);
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-        glUniform3f(vertexColorId, 0.1f, 0.2f, 0.3f);
-        
         glEnable(GL_POLYGON_OFFSET_FILL);
         glDrawArrays(GL_TRIANGLES, 0, vertices.size());
         glPolygonOffset(1.0f, 1.0f);
         glDisable(GL_POLYGON_OFFSET_FILL);
         
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-        glUniform3f(vertexColorId, 1.0f, 1.0f, 1.0f);
+        glUniform1f(isWireframeId, 0.0f);
         glDrawArrays(GL_TRIANGLES, 0, vertices.size());
-        
         
         glDisableVertexAttribArray(vertexPosition_modelspaceID);
         glfwSwapBuffers();
