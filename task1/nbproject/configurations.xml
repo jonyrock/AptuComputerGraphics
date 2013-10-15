@@ -4,6 +4,7 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>include/objloader.hpp</itemPath>
       <itemPath>include/shader.hpp</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -15,6 +16,7 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>src/main.cpp</itemPath>
+      <itemPath>src/objloader.cpp</itemPath>
       <itemPath>src/shader.cpp</itemPath>
       <itemPath>src/simple.frag</itemPath>
       <itemPath>src/simple.vert</itemPath>
@@ -51,11 +53,15 @@
           <useLinkerLibraries>false</useLinkerLibraries>
         </ccTool>
       </compileType>
+      <item path="include/objloader.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/shader.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="resources/model.obj" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/objloader.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/shader.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -83,11 +89,15 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="include/objloader.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/shader.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="resources/model.obj" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/objloader.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/shader.cpp" ex="false" tool="1" flavor2="0">
       </item>
