@@ -35,6 +35,7 @@ int main(void) {
     glfwEnable(GLFW_STICKY_KEYS);
     
     glEnable(GL_DEPTH_TEST);
+    
     glDepthFunc(GL_LESS);
     
     // GLSL init
@@ -65,6 +66,7 @@ int main(void) {
     glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof (vec3), &vertices[0], GL_STATIC_DRAW);
     
     glClearColor(0.9f, 0.9f, 0.9f, 0.0f);
+    
     do {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glUniformMatrix4fv(mvpId, 1, GL_FALSE, &MVP[0][0]);
@@ -74,11 +76,16 @@ int main(void) {
         
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
         glUniform3f(vertexColorId, 0.1f, 0.2f, 0.3f);
+        
+        glEnable(GL_POLYGON_OFFSET_FILL);
         glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+        glPolygonOffset(1.0f, 1.0f);
+        glDisable(GL_POLYGON_OFFSET_FILL);
         
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
         glUniform3f(vertexColorId, 1.0f, 1.0f, 1.0f);
         glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+        
         
         glDisableVertexAttribArray(vertexPosition_modelspaceID);
         glfwSwapBuffers();
