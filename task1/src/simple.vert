@@ -23,7 +23,11 @@ void main() {
     bright += 0.15;
     bright *= 10;
     if(isWireframe == 1.0)
-        fragmentColor = vec3(1.0, 1.0, 1.0) * bright;
+        fragmentColor = vec3(1.0, 1.0, 1.0);
     else
-        fragmentColor = vec3(.7f, .5f, .5f) * bright;
+        fragmentColor = vec3(.7f, .5f, .5f);
+    
+    // it is not used, see simple.frag
+    // fragmentColor *= bright;
+
 }
