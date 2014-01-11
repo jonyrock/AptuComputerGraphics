@@ -1,2 +1,0 @@
-* Cut previous code
-* Draw colored cube http://www.opengl-tutorial.org/beginners-tutorials/tutorial-4-a-colored-cube/

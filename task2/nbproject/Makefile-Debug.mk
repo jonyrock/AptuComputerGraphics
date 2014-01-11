@@ -36,7 +36,8 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/src/camera.o \
-	${OBJECTDIR}/src/figures.o \
+	${OBJECTDIR}/src/figures/colors.o \
+	${OBJECTDIR}/src/figures/geom.o \
 	${OBJECTDIR}/src/main.o \
 	${OBJECTDIR}/src/shader.o
 
@@ -70,10 +71,15 @@ ${OBJECTDIR}/src/camera.o: src/camera.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -std=c++11 -lGLEW -lglfw -lGL -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/camera.o src/camera.cpp
 
-${OBJECTDIR}/src/figures.o: src/figures.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src
+${OBJECTDIR}/src/figures/colors.o: src/figures/colors.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/figures
 	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -std=c++11 -lGLEW -lglfw -lGL -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/figures.o src/figures.cpp
+	$(COMPILE.cc) -g -Iinclude -std=c++11 -lGLEW -lglfw -lGL -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/figures/colors.o src/figures/colors.cpp
+
+${OBJECTDIR}/src/figures/geom.o: src/figures/geom.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/figures
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude -std=c++11 -lGLEW -lglfw -lGL -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/figures/geom.o src/figures/geom.cpp
 
 ${OBJECTDIR}/src/main.o: src/main.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src

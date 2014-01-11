@@ -1,9 +1,9 @@
 #include "shader.h"
-#include "figures.h"
+#include "figures/geom.h"
+#include "figures/colors.h"
 #include "camera.h"
 
 #include <GL/glfw.h>
-
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -37,7 +37,7 @@ int GLinit() {
         return -1;
     }
 
-    glfwSetWindowTitle("Cow party");
+    glfwSetWindowTitle("Geometry party");
     glfwEnable(GLFW_STICKY_KEYS);
 
     glEnable(GL_DEPTH_TEST);
@@ -56,21 +56,26 @@ int main(void) {
 
     // GLSL init
     GLuint programId = LoadShaders("src/simple.vert", "src/simple.frag");
-    
+
+    // Uniform
     GLuint mvpId = glGetUniformLocation(programId, "MVP");
-    GLuint vertexColorId = glGetUniformLocation(programId, "vertexColor");
     GLuint isWireframeId = glGetUniformLocation(programId, "isWireframe");
     GLuint nearClippingPlaneId = glGetUniformLocation(programId, "nearClippingPlaneId");
     GLuint farClippingPlaneId = glGetUniformLocation(programId, "farClippingPlaneId");
-    
+
+    // Attributes
     GLuint vertexPosition_modelspaceID = glGetAttribLocation(programId, "vertexPosition_modelspace");
-    
+    GLuint vertexColorId = glGetAttribLocation(programId, "vertexColor");
+
     glUseProgram(programId);
 
     // Model init
     mat4 Model;
     vector<vec3> vertices;
+    vector<vec3> verticesColor;
     fillCube(vertices);
+    fillCubeColor(verticesColor);
+
     // View init
     mat4 View;
     Camera camera(6, 0, 10);
@@ -91,8 +96,18 @@ int main(void) {
     glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof (vec3), &vertices[0], GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-    glClearColor(0.9f, 0.9f, 0.9f, 0.0f);
 
+
+    vector<vec3> g_color_buffer_data;
+    fillCubeColor(g_color_buffer_data);
+    
+    GLuint colorbuffer;
+    glGenBuffers(1, &colorbuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
+    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof (vec3), &g_color_buffer_data[0], GL_STATIC_DRAW);
+
+
+    glClearColor(0.9f, 0.9f, 0.9f, 0.0f);
 
     while (true) {
 
@@ -104,9 +119,28 @@ int main(void) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glUniformMatrix4fv(mvpId, 1, GL_FALSE, &MVP[0][0]);
 
+        glEnableClientState(GL_VERTEX_ARRAY);
+        glEnableVertexAttribArray(vertexColorId);
+        glVertexPointer(2, GL_FLOAT, 0, &verticesColor[0]);
+        glVertexAttribPointer(vertexPosition_modelspaceID, 3, GL_FLOAT, GL_FALSE, 0, (void*) 0);
+
+        // 2nd attribute buffer : colors
+        glEnableVertexAttribArray(1);
+        glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
+        glVertexAttribPointer(
+                1, // attribute. No particular reason for 1, but must match the layout in the shader.
+                3, // size
+                GL_FLOAT, // type
+                GL_FALSE, // normalized?
+                0, // stride
+                (void*) 0 // array buffer offset
+                );
+
         glEnableVertexAttribArray(vertexPosition_modelspaceID);
         glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
         glVertexAttribPointer(vertexPosition_modelspaceID, 3, GL_FLOAT, GL_FALSE, 0, (void*) 0);
+
+
 
         glUniform1f(isWireframeId, 1.0f);
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
@@ -118,8 +152,10 @@ int main(void) {
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
         glUniform1f(isWireframeId, 0.0f);
         glDrawArrays(GL_TRIANGLES, 0, vertices.size());
-        
+
         glDisableVertexAttribArray(vertexPosition_modelspaceID);
+
+
         glfwSwapBuffers();
 
         if (glfwGetKey(GLFW_KEY_ESC) == GLFW_PRESS)
@@ -128,7 +164,7 @@ int main(void) {
             break;
 
     }
-    
+
     glDeleteProgram(programId);
     glfwTerminate();
 
