@@ -3,34 +3,33 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+#include "tools.h"
+
 using namespace glm;
 
 class Camera {
-    
 private:
     vec3 _cameraPosition;
     int _xBefore;
     int _yBefore;
     int _wheelBefore;
-    
-    inline void initVars(){
+
+    inline void initVars() {
         _xBefore = 0;
         _yBefore = 0;
         _wheelBefore = 0;
     }
-        
+
 public:
-    
-    
-    
+
     Camera(float x, float y, float z) : _cameraPosition(x, y, z) {
-        initVars();
+        initVars(); 
     }
-    
+
     Camera(vec3 cameraPosition) : _cameraPosition(cameraPosition) {
         initVars();
     }
-    
+
     inline void updateView(mat4& view) {
         view = lookAt(_cameraPosition, vec3(0, 0, 0), vec3(0, 1, 0));
     }
@@ -45,7 +44,7 @@ public:
         uv *= scale;
         _cameraPosition += uv;
     }
-    
+
     inline void rotateX(int deg) {
         if (deg == 0)
             return;
@@ -59,13 +58,15 @@ public:
     inline void rotateY(int deg) {
         if (deg == 0)
             return;
+//        cout << _cameraPosition << "-->";
         auto rm = rotate(mat4(), deg / 5.0f, vec3(1.0f, 0.0f, 0.0f));
         auto v4 = rm * glm::vec4(_cameraPosition, 1);
         _cameraPosition[0] = v4[0];
         _cameraPosition[1] = v4[1];
         _cameraPosition[2] = v4[2];
+//        cout << _cameraPosition << endl;
     }
-    
+
     void windowsIterate();
-    
+
 };
