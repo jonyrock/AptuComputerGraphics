@@ -13,8 +13,13 @@ varying vec3 fragmentColor;
 
 void main() {
     
-    gl_Position =  MVP * vec4(vertexPosition_modelspace, 1);
+    vec4 v = vec4(vertexPosition_modelspace, 1);
+    v.y = v.y * cos(v.y * 20.0) + sin(v.x) * 2;
+    v = MVP * v;
     
+
+
+    gl_Position = v;
     if(isWireframe == 1.0)
         fragmentColor = vertexColor;
     else

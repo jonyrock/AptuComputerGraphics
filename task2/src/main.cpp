@@ -53,6 +53,8 @@ int main(void) {
     if (GLinit() != 0) {
         return 1;
     }
+    
+    cout << " -- >" << glGetString(GL_VERSION) << endl;
 
     // GLSL init
     GLuint programId = LoadShaders("src/simple.vert", "src/simple.frag");
@@ -96,15 +98,10 @@ int main(void) {
     glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof (vec3), &vertices[0], GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-
-
-    vector<vec3> g_color_buffer_data;
-    fillCubeColor(g_color_buffer_data);
-    
     GLuint colorbuffer;
     glGenBuffers(1, &colorbuffer);
     glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
-    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof (vec3), &g_color_buffer_data[0], GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof (vec3), &verticesColor[0], GL_STATIC_DRAW);
 
 
     glClearColor(0.9f, 0.9f, 0.9f, 0.0f);
@@ -127,20 +124,11 @@ int main(void) {
         // 2nd attribute buffer : colors
         glEnableVertexAttribArray(1);
         glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
-        glVertexAttribPointer(
-                1, // attribute. No particular reason for 1, but must match the layout in the shader.
-                3, // size
-                GL_FLOAT, // type
-                GL_FALSE, // normalized?
-                0, // stride
-                (void*) 0 // array buffer offset
-                );
+        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
         glEnableVertexAttribArray(vertexPosition_modelspaceID);
         glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
         glVertexAttribPointer(vertexPosition_modelspaceID, 3, GL_FLOAT, GL_FALSE, 0, (void*) 0);
-
-
 
         glUniform1f(isWireframeId, 1.0f);
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
@@ -154,7 +142,6 @@ int main(void) {
         glDrawArrays(GL_TRIANGLES, 0, vertices.size());
 
         glDisableVertexAttribArray(vertexPosition_modelspaceID);
-
 
         glfwSwapBuffers();
 
