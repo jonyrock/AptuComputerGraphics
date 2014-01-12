@@ -4,6 +4,7 @@
 #include "camera.h"
 
 #include <GL/glfw.h>
+#include <GL/glew.h>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -18,6 +19,7 @@ using namespace glm;
 typedef unsigned char uchar;
 
 int GLinit() {
+
     if (!glfwInit()) {
         cerr << "Failed to initialize GLFW" << endl;
         return -1;
@@ -31,8 +33,8 @@ int GLinit() {
         cerr << "Failed to open GLFW window." << endl;
         glfwTerminate();
         return -1;
-    }
-    if (glewInit() != GLEW_OK) {
+    } 
+   if (glewInit() != GLEW_OK) {
         cerr << "Failed to initialize GLEW" << endl;
         return -1;
     }
@@ -53,7 +55,7 @@ int main(void) {
     if (GLinit() != 0) {
         return 1;
     }
-    
+
     cout << " -- >" << glGetString(GL_VERSION) << endl;
 
     // GLSL init

@@ -9,7 +9,7 @@
                    projectFiles="true">
       <logicalFolder name="figures" displayName="figures" projectFiles="true">
         <itemPath>include/figures/colors.h</itemPath>
-        <itemPath>include/figures/figures.h</itemPath>
+        <itemPath>include/figures/geom.h</itemPath>
       </logicalFolder>
       <itemPath>include/camera.h</itemPath>
       <itemPath>include/shader.h</itemPath>
@@ -62,6 +62,7 @@
           <standard>8</standard>
           <incDir>
             <pElem>include</pElem>
+            <pElem>/usr/include</pElem>
           </incDir>
           <commandLine>-lGLEW -lglfw -lGL</commandLine>
           <useLinkerLibraries>false</useLinkerLibraries>
@@ -71,7 +72,7 @@
       </item>
       <item path="include/figures/colors.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="include/figures/figures.h" ex="false" tool="3" flavor2="0">
+      <item path="include/figures/geom.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/shader.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -111,7 +112,6 @@
           <incDir>
             <pElem>include</pElem>
           </incDir>
-          <commandLine>-lGLEW -lglfw -lGL</commandLine>
         </ccTool>
         <fortranCompilerTool>
           <developmentMode>5</developmentMode>
@@ -119,12 +119,18 @@
         <asmTool>
           <developmentMode>5</developmentMode>
         </asmTool>
+        <linkerTool>
+          <linkerLibItems>
+            <linkerOptionItem>`pkg-config --libs glew`</linkerOptionItem>
+            <linkerOptionItem>`pkg-config --libs libglfw`</linkerOptionItem>
+          </linkerLibItems>
+        </linkerTool>
       </compileType>
       <item path="include/camera.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/figures/colors.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="include/figures/figures.h" ex="false" tool="3" flavor2="0">
+      <item path="include/figures/geom.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/shader.h" ex="false" tool="3" flavor2="0">
       </item>

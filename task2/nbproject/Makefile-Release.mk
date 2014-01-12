@@ -46,8 +46,8 @@ OBJECTFILES= \
 CFLAGS=
 
 # CC Compiler Flags
-CCFLAGS=-lGLEW -lglfw -lGL
-CXXFLAGS=-lGLEW -lglfw -lGL
+CCFLAGS=
+CXXFLAGS=
 
 # Fortran Compiler Flags
 FFLAGS=
@@ -56,7 +56,7 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=
+LDLIBSOPTIONS=`pkg-config --libs glew` `pkg-config --libs libglfw`  
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
@@ -69,27 +69,27 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/task2: ${OBJECTFILES}
 ${OBJECTDIR}/src/camera.o: src/camera.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -std=c++11 -lGLEW -lglfw -lGL -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/camera.o src/camera.cpp
+	$(COMPILE.cc) -O2 -Iinclude `pkg-config --cflags glew` `pkg-config --cflags libglfw` -std=c++11  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/camera.o src/camera.cpp
 
 ${OBJECTDIR}/src/figures/colors.o: src/figures/colors.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/figures
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -std=c++11 -lGLEW -lglfw -lGL -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/figures/colors.o src/figures/colors.cpp
+	$(COMPILE.cc) -O2 -Iinclude `pkg-config --cflags glew` `pkg-config --cflags libglfw` -std=c++11  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/figures/colors.o src/figures/colors.cpp
 
 ${OBJECTDIR}/src/figures/geom.o: src/figures/geom.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/figures
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -std=c++11 -lGLEW -lglfw -lGL -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/figures/geom.o src/figures/geom.cpp
+	$(COMPILE.cc) -O2 -Iinclude `pkg-config --cflags glew` `pkg-config --cflags libglfw` -std=c++11  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/figures/geom.o src/figures/geom.cpp
 
 ${OBJECTDIR}/src/main.o: src/main.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -std=c++11 -lGLEW -lglfw -lGL -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/main.o src/main.cpp
+	$(COMPILE.cc) -O2 -Iinclude `pkg-config --cflags glew` `pkg-config --cflags libglfw` -std=c++11  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/main.o src/main.cpp
 
 ${OBJECTDIR}/src/shader.o: src/shader.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -std=c++11 -lGLEW -lglfw -lGL -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/shader.o src/shader.cpp
+	$(COMPILE.cc) -O2 -Iinclude `pkg-config --cflags glew` `pkg-config --cflags libglfw` -std=c++11  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/shader.o src/shader.cpp
 
 # Subprojects
 .build-subprojects:
