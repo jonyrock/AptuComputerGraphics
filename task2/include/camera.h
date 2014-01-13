@@ -13,17 +13,21 @@ private:
     int _xBefore;
     int _yBefore;
     int _wheelBefore;
+    float _heading;
+    float _pitch;
 
     inline void initVars() {
         _xBefore = 0;
         _yBefore = 0;
         _wheelBefore = 0;
+        _heading = 0;
+        _pitch = 0;
     }
 
 public:
 
     Camera(float x, float y, float z) : _cameraPosition(x, y, z) {
-        initVars(); 
+        initVars();
     }
 
     Camera(vec3 cameraPosition) : _cameraPosition(cameraPosition) {
@@ -32,6 +36,8 @@ public:
 
     inline void updateView(mat4& view) {
         view = lookAt(_cameraPosition, vec3(0, 0, 0), vec3(0, 1, 0));
+        view = view * rotate(mat4(1.0f), -_heading, vec3(1, 0, 0));
+        view = view * rotate(mat4(1.0f), -_pitch, vec3(0, 1, 0));
     }
 
     inline void zoom(float scale = 1) {
@@ -48,23 +54,13 @@ public:
     inline void rotateX(int deg) {
         if (deg == 0)
             return;
-        auto rm = rotate(mat4(), deg / 5.0f, vec3(0.0f, 1.0f, 0.0f));
-        auto v4 = rm * glm::vec4(_cameraPosition, 1);
-        _cameraPosition[0] = v4[0];
-        _cameraPosition[1] = v4[1];
-        _cameraPosition[2] = v4[2];
+        _pitch += deg / 5.0f;
     }
 
     inline void rotateY(int deg) {
         if (deg == 0)
             return;
-//        cout << _cameraPosition << "-->";
-        auto rm = rotate(mat4(), deg / 5.0f, vec3(1.0f, 0.0f, 0.0f));
-        auto v4 = rm * glm::vec4(_cameraPosition, 1);
-        _cameraPosition[0] = v4[0];
-        _cameraPosition[1] = v4[1];
-        _cameraPosition[2] = v4[2];
-//        cout << _cameraPosition << endl;
+         _heading += deg / 5.0f;
     }
 
     void windowsIterate();
