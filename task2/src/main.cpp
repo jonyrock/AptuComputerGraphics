@@ -177,7 +177,7 @@ int main(void) {
             glBindBuffer(GL_ARRAY_BUFFER, vertexCubeBufferUV);
             glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
 
-            glDrawArrays(GL_TRIANGLES, 0, 6 * 3);
+            glDrawArrays(GL_TRIANGLES, 0, 4 * 3);
         }
 
         glDisableVertexAttribArray(0);
