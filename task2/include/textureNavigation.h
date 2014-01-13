@@ -12,11 +12,15 @@ public:
 
     TextureNavigation(GLuint textureID, GLuint textureScaleId)
     : _textureID(textureID), _textureScaleId(textureScaleId) {
-        _ts = 0;
+        _ts = 1;
     }
 
     inline void windowsIterate() {
-        _ts += 0.1;
+        if (glfwGetKey(GLFW_KEY_KP_ADD) == GLFW_PRESS)
+            _ts -= 0.1;
+        if (glfwGetKey(GLFW_KEY_KP_SUBTRACT) == GLFW_PRESS)
+            _ts += 0.1;
+
         glUniform1f(_textureScaleId, _ts);
         setTexturesParam();
     }
