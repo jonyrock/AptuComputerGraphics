@@ -87,6 +87,7 @@
             <linkerOptionItem>`pkg-config --libs libglfw`</linkerOptionItem>
             <linkerOptionItem>`pkg-config --libs Magick++`</linkerOptionItem>
           </linkerLibItems>
+          <commandLine>-lGLEW -lMagick++ -lGL -lglfw</commandLine>
         </linkerTool>
       </compileType>
       <item path="include/camera.h" ex="false" tool="3" flavor2="0">
@@ -145,6 +146,9 @@
           <commandLine>-lGLEW -lglfw -lGL</commandLine>
           <useLinkerLibraries>false</useLinkerLibraries>
         </ccTool>
+        <linkerTool>
+          <commandLine>-lGLEW -lMagick++</commandLine>
+        </linkerTool>
       </compileType>
       <item path="include/camera.h" ex="false" tool="3" flavor2="0">
       </item>
