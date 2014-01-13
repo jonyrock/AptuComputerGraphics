@@ -4,6 +4,18 @@
 using namespace std;
 using namespace glm;
 
+void fillPlaneUV(std::vector<glm::vec2>& vertices) {
+
+    vertices.push_back(vec2(1, 0));
+    vertices.push_back(vec2(0, 1));
+    vertices.push_back(vec2(0, 0));
+    
+    vertices.push_back(vec2(1, 0));
+    vertices.push_back(vec2(1, 1));
+    vertices.push_back(vec2(0, 1));
+
+}
+
 void fillCubeUV(std::vector<glm::vec2>& vertices) {
     vertices.push_back(vec2(0.000059f, 1.0f - 0.000004f));
     vertices.push_back(vec2(0.000103f, 1.0f - 0.336048f));
@@ -41,6 +53,5 @@ void fillCubeUV(std::vector<glm::vec2>& vertices) {
     vertices.push_back(vec2(0.667969f, 1.0f - 0.671889f));
     vertices.push_back(vec2(1.000004f, 1.0f - 0.671847f));
     vertices.push_back(vec2(0.667979f, 1.0f - 0.335851f));
-
 }
 

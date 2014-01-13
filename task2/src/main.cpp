@@ -71,19 +71,13 @@ int main(void) {
 
     // Model init
     mat4 Model;
-    vector<vec3> vertices;
+    vector<vec3> vertices;  
     vector<vec2> verticesUV;
-    fillCube(vertices);
+    fillPlane(vertices);
 
-    // Load the texture using any two methods
-//    GLuint Texture = loadBMP("resources/earth_texture_grid.bmp");
-    GLuint Texture = loadJPEG("resources/lenna_head.jpg");
-    
-//    GLuint Texture = loadDDS("resources/uvtemplate.DDS");
-
-    // Get a handle for our "myTextureSampler" uniform
+    GLuint Texture = loadJPEG("resources/lenna_head.jpg");  
     GLuint TextureID = glGetUniformLocation(programId, "myTextureSampler");
-    fillCubeUV(verticesUV);
+    fillPlaneUV(verticesUV);
 
     // View init
     mat4 View;
@@ -93,7 +87,6 @@ int main(void) {
     float NEAR_CLIPPING_PLANE = 0.1f;
     float FAR_CLIPPING_PLANE = 100.0f;
     mat4 Projection = perspective(45.0f, 4.0f / 3.0f, NEAR_CLIPPING_PLANE, FAR_CLIPPING_PLANE);
-
 
     mat4 MVP;
 
@@ -133,7 +126,7 @@ int main(void) {
         // 1rst attribute buffer : vertices
         glEnableVertexAttribArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-        glVertexAttribPointer(
+        glVertexAttribPointer(  
                 0, // attribute. No particular reason for 0, but must match the layout in the shader.
                 3, // size
                 GL_FLOAT, // type
