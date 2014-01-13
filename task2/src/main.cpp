@@ -3,6 +3,7 @@
 #include "figures/geom.h"
 #include "figures/textures.h"
 #include "camera.h"
+#include "textureNavigation.h"
 
 
 #include <GL/glfw.h>
@@ -13,7 +14,7 @@
 
 #include <iostream>
 #include <vector>
-#include <algorithm>
+
 
 using namespace std;
 using namespace glm;
@@ -53,8 +54,8 @@ int GLinit() {
 }
 
 
-int main(void) {
 
+int main(void) {
 
     if (GLinit() != 0) {
         return 1;
@@ -65,23 +66,26 @@ int main(void) {
 
     // Uniform
     GLuint mvpId = glGetUniformLocation(programId, "MVP");
+    GLuint textureScaleId = glGetUniformLocation(programId, "textureScale");
 
     // Attributes
     glUseProgram(programId);
 
     // Model init
     mat4 Model;
-    vector<vec3> vertices;  
+    vector<vec3> vertices;
     vector<vec2> verticesUV;
-    fillPlane(vertices);
+    fillPlane(vertices);glUniform1f(textureScaleId, 2);
 
-    GLuint Texture = loadJPEG("resources/lenna_head.jpg");  
+    GLuint Texture = loadJPEG("resources/lenna_head.jpg");
     GLuint TextureID = glGetUniformLocation(programId, "myTextureSampler");
+    
     fillPlaneUV(verticesUV);
 
     // View init
     mat4 View;
     Camera camera(6, 0, 10);
+    TextureNavigation textureNavigation(TextureID, textureScaleId);
 
     // Projection init
     float NEAR_CLIPPING_PLANE = 0.1f;
@@ -110,11 +114,14 @@ int main(void) {
 
         camera.windowsIterate();
         camera.updateView(View);
+        
+        textureNavigation.windowsIterate();
 
         MVP = Projection * View * Model;
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glUniformMatrix4fv(mvpId, 1, GL_FALSE, &MVP[0][0]);
+        
 
 
         // Bind our texture in Texture Unit 0
@@ -126,8 +133,8 @@ int main(void) {
         // 1rst attribute buffer : vertices
         glEnableVertexAttribArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-        glVertexAttribPointer(  
-                0, // attribute. No particular reason for 0, but must match the layout in the shader.
+        glVertexAttribPointer(
+                0, // attribute. No particular reason for 0, but must matctextureScaleh the layout in the shader.
                 3, // size
                 GL_FLOAT, // type
                 GL_FALSE, // normalized?
@@ -156,12 +163,11 @@ int main(void) {
         // Swap buffers
         glfwSwapBuffers();
 
-
         if (glfwGetKey(GLFW_KEY_ESC) == GLFW_PRESS)
             break;
         if (!glfwGetWindowParam(GLFW_OPENED))
             break;
-
+        
     }
 
     glDeleteProgram(programId);

@@ -88,17 +88,6 @@ GLuint loadBMP(const char* imagepath) {
     // OpenGL has now copied the data. Free our own version
     delete [] data;
 
-    // Poor filtering, or ...
-    //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST); 
-
-    // ... nice trilinear filtering.
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-    glGenerateMipmap(GL_TEXTURE_2D);
-
     // Return the ID of the texture we just created
     return textureID;
 }
@@ -125,10 +114,6 @@ GLuint loadJPEG(const char* filename) {
         for (size_t i = 0; i < image.size().width(); i++) {
             for (size_t j = 0; j < image.size().height(); j++) {
                 ColorRGB rgb(image.pixelColor(i, j));
-//                cout << "red " << rgb.red() << endl;
-//                data[dataPtr++] = (unsigned char)(rgb.red() * 100);
-//                data[dataPtr++] = (unsigned char)(rgb.green() * 100);
-//                data[dataPtr++] = (unsigned char)(rgb.blue() * 100);
                 data[dataPtr++] = (GLfloat)rgb.red();
                 data[dataPtr++] = (GLfloat)rgb.green();
                 data[dataPtr++] = (GLfloat)rgb.blue();
@@ -139,17 +124,6 @@ GLuint loadJPEG(const char* filename) {
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB,
                 image.size().width(), image.size().height(),
                 0, GL_RGB, GL_FLOAT, data);
-
-        // Poor filtering, or ...
-        //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-        //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST); 
-
-        // ... nice trilinear filtering.
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-        glGenerateMipmap(GL_TEXTURE_2D);
 
         delete [] data;
         // Return the ID of the texture we just created
