@@ -1,8 +1,16 @@
-#version 120
+#version 330 core
 
-varying vec3 fragmentColor;
+// Interpolated values from the vertex shaders
+in vec2 UV;
+
+// Ouput data
+out vec3 color;
+
+// Values that stay constant for the whole mesh.
+uniform sampler2D myTextureSampler;
 
 void main(){
-    float bright = 1 - (gl_FragCoord.z - 0.99) * 100;
-    gl_FragColor = vec4(fragmentColor * bright, 1);
+
+	// Output color = color of the texture at the specified UV
+	color = texture2D( myTextureSampler, UV ).rgb;
 }

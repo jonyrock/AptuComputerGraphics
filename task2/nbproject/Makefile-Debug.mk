@@ -36,10 +36,11 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/src/camera.o \
-	${OBJECTDIR}/src/figures/colors.o \
 	${OBJECTDIR}/src/figures/geom.o \
+	${OBJECTDIR}/src/figures/textures.o \
 	${OBJECTDIR}/src/main.o \
-	${OBJECTDIR}/src/shader.o
+	${OBJECTDIR}/src/shader.o \
+	${OBJECTDIR}/src/texture.o
 
 
 # C Compiler Flags
@@ -71,15 +72,15 @@ ${OBJECTDIR}/src/camera.o: src/camera.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -I/usr/include -std=c++11 -lGLEW -lglfw -lGL -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/camera.o src/camera.cpp
 
-${OBJECTDIR}/src/figures/colors.o: src/figures/colors.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/figures
-	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -I/usr/include -std=c++11 -lGLEW -lglfw -lGL -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/figures/colors.o src/figures/colors.cpp
-
 ${OBJECTDIR}/src/figures/geom.o: src/figures/geom.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/figures
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -I/usr/include -std=c++11 -lGLEW -lglfw -lGL -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/figures/geom.o src/figures/geom.cpp
+
+${OBJECTDIR}/src/figures/textures.o: src/figures/textures.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/figures
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude -I/usr/include -std=c++11 -lGLEW -lglfw -lGL -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/figures/textures.o src/figures/textures.cpp
 
 ${OBJECTDIR}/src/main.o: src/main.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
@@ -90,6 +91,11 @@ ${OBJECTDIR}/src/shader.o: src/shader.cpp
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -I/usr/include -std=c++11 -lGLEW -lglfw -lGL -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/shader.o src/shader.cpp
+
+${OBJECTDIR}/src/texture.o: src/texture.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude -I/usr/include -std=c++11 -lGLEW -lglfw -lGL -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/texture.o src/texture.cpp
 
 # Subprojects
 .build-subprojects:

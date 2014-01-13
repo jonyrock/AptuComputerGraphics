@@ -8,11 +8,12 @@
                    displayName="Header Files"
                    projectFiles="true">
       <logicalFolder name="figures" displayName="figures" projectFiles="true">
-        <itemPath>include/figures/colors.h</itemPath>
         <itemPath>include/figures/geom.h</itemPath>
+        <itemPath>include/figures/textures.h</itemPath>
       </logicalFolder>
       <itemPath>include/camera.h</itemPath>
       <itemPath>include/shader.h</itemPath>
+      <itemPath>include/texture.h</itemPath>
       <itemPath>include/tools.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -23,14 +24,15 @@
                    displayName="Source Files"
                    projectFiles="true">
       <logicalFolder name="figures" displayName="figures" projectFiles="true">
-        <itemPath>src/figures/colors.cpp</itemPath>
         <itemPath>src/figures/geom.cpp</itemPath>
+        <itemPath>src/figures/textures.cpp</itemPath>
       </logicalFolder>
       <itemPath>src/camera.cpp</itemPath>
       <itemPath>src/main.cpp</itemPath>
       <itemPath>src/shader.cpp</itemPath>
       <itemPath>src/simple.frag</itemPath>
       <itemPath>src/simple.vert</itemPath>
+      <itemPath>src/texture.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -70,19 +72,21 @@
       </compileType>
       <item path="include/camera.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="include/figures/colors.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="include/figures/geom.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="include/figures/textures.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/shader.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/texture.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/tools.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/camera.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="src/figures/colors.cpp" ex="false" tool="1" flavor2="0">
-      </item>
       <item path="src/figures/geom.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/figures/textures.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/main.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -91,6 +95,8 @@
       <item path="src/simple.frag" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/simple.vert" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/texture.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="todo.txt" ex="false" tool="3" flavor2="0">
       </item>
@@ -128,19 +134,21 @@
       </compileType>
       <item path="include/camera.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="include/figures/colors.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="include/figures/geom.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="include/figures/textures.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/shader.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/texture.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/tools.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/camera.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="src/figures/colors.cpp" ex="false" tool="1" flavor2="0">
-      </item>
       <item path="src/figures/geom.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/figures/textures.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/main.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -149,6 +157,8 @@
       <item path="src/simple.frag" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/simple.vert" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/texture.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="todo.txt" ex="false" tool="3" flavor2="0">
       </item>

@@ -1,7 +1,9 @@
 #include "shader.h"
+#include "texture.h"
 #include "figures/geom.h"
-#include "figures/colors.h"
+#include "figures/textures.h"
 #include "camera.h"
+
 
 #include <GL/glfw.h>
 #include <GL/glew.h>
@@ -26,15 +28,15 @@ int GLinit() {
     }
 
     glfwOpenWindowHint(GLFW_FSAA_SAMPLES, 4);
-    glfwOpenWindowHint(GLFW_OPENGL_VERSION_MAJOR, 2);
+    glfwOpenWindowHint(GLFW_OPENGL_VERSION_MAJOR, 3);
     glfwOpenWindowHint(GLFW_OPENGL_VERSION_MINOR, 1);
 
     if (!glfwOpenWindow(700, 600, 0, 0, 0, 0, 32, 0, GLFW_WINDOW)) {
         cerr << "Failed to open GLFW window." << endl;
         glfwTerminate();
         return -1;
-    } 
-   if (glewInit() != GLEW_OK) {
+    }
+    if (glewInit() != GLEW_OK) {
         cerr << "Failed to initialize GLEW" << endl;
         return -1;
     }
@@ -56,29 +58,28 @@ int main(void) {
         return 1;
     }
 
-    cout << " -- >" << glGetString(GL_VERSION) << endl;
-
     // GLSL init
     GLuint programId = LoadShaders("src/simple.vert", "src/simple.frag");
 
     // Uniform
     GLuint mvpId = glGetUniformLocation(programId, "MVP");
-    GLuint isWireframeId = glGetUniformLocation(programId, "isWireframe");
-    GLuint nearClippingPlaneId = glGetUniformLocation(programId, "nearClippingPlaneId");
-    GLuint farClippingPlaneId = glGetUniformLocation(programId, "farClippingPlaneId");
 
     // Attributes
-    GLuint vertexPosition_modelspaceID = glGetAttribLocation(programId, "vertexPosition_modelspace");
-    GLuint vertexColorId = glGetAttribLocation(programId, "vertexColor");
-
     glUseProgram(programId);
 
     // Model init
     mat4 Model;
     vector<vec3> vertices;
-    vector<vec3> verticesColor;
+    vector<vec2> verticesUV;
     fillCube(vertices);
-    fillCubeColor(verticesColor);
+
+    // Load the texture using any two methods
+    //GLuint Texture = loadBMP_custom("uvtemplate.bmp");
+    GLuint Texture = loadDDS("resources/uvtemplate.DDS");
+
+    // Get a handle for our "myTextureSampler" uniform
+    GLuint TextureID = glGetUniformLocation(programId, "myTextureSampler");
+    fillCubeUV(verticesUV);
 
     // View init
     mat4 View;
@@ -88,8 +89,7 @@ int main(void) {
     float NEAR_CLIPPING_PLANE = 0.1f;
     float FAR_CLIPPING_PLANE = 100.0f;
     mat4 Projection = perspective(45.0f, 4.0f / 3.0f, NEAR_CLIPPING_PLANE, FAR_CLIPPING_PLANE);
-    glUniform1f(nearClippingPlaneId, NEAR_CLIPPING_PLANE);
-    glUniform1f(farClippingPlaneId, FAR_CLIPPING_PLANE);
+
 
     mat4 MVP;
 
@@ -100,10 +100,11 @@ int main(void) {
     glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof (vec3), &vertices[0], GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-    GLuint colorbuffer;
-    glGenBuffers(1, &colorbuffer);
-    glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
-    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof (vec3), &verticesColor[0], GL_STATIC_DRAW);
+    GLuint uvbuffer;
+    glGenBuffers(1, &uvbuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
+    glBufferData(GL_ARRAY_BUFFER, verticesUV.size() * sizeof (vec2), &verticesUV[0], GL_STATIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 
     glClearColor(0.9f, 0.9f, 0.9f, 0.0f);
@@ -118,34 +119,46 @@ int main(void) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glUniformMatrix4fv(mvpId, 1, GL_FALSE, &MVP[0][0]);
 
-        glEnableClientState(GL_VERTEX_ARRAY);
-        glEnableVertexAttribArray(vertexColorId);
-        glVertexPointer(2, GL_FLOAT, 0, &verticesColor[0]);
-        glVertexAttribPointer(vertexPosition_modelspaceID, 3, GL_FLOAT, GL_FALSE, 0, (void*) 0);
 
-        // 2nd attribute buffer : colors
-        glEnableVertexAttribArray(1);
-        glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
-        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
+        // Bind our texture in Texture Unit 0
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, Texture);
+        // Set our "myTextureSampler" sampler to user Texture Unit 0
+        glUniform1i(TextureID, 0);
 
-        glEnableVertexAttribArray(vertexPosition_modelspaceID);
+        // 1rst attribute buffer : vertices
+        glEnableVertexAttribArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-        glVertexAttribPointer(vertexPosition_modelspaceID, 3, GL_FLOAT, GL_FALSE, 0, (void*) 0);
+        glVertexAttribPointer(
+                0, // attribute. No particular reason for 0, but must match the layout in the shader.
+                3, // size
+                GL_FLOAT, // type
+                GL_FALSE, // normalized?
+                0, // stride
+                (void*) 0 // array buffer offset
+                );
 
-        glUniform1f(isWireframeId, 1.0f);
-        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-        glEnable(GL_POLYGON_OFFSET_FILL);
-        glDrawArrays(GL_TRIANGLES, 0, vertices.size());
-        glPolygonOffset(1.0f, 1.0f);
-        glDisable(GL_POLYGON_OFFSET_FILL);
+        // 2nd attribute buffer : UVs
+        glEnableVertexAttribArray(1);
+        glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
+        glVertexAttribPointer(
+                1, // attribute. No particular reason for 1, but must match the layout in the shader.
+                2, // size : U+V => 2
+                GL_FLOAT, // type
+                GL_FALSE, // normalized?
+                0, // stride
+                (void*) 0 // array buffer offset
+                );
 
-        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-        glUniform1f(isWireframeId, 0.0f);
-        glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+        // Draw the triangle !
+        glDrawArrays(GL_TRIANGLES, 0, 12 * 3); // 12*3 indices starting at 0 -> 12 triangles
 
-        glDisableVertexAttribArray(vertexPosition_modelspaceID);
+        glDisableVertexAttribArray(0);
+        glDisableVertexAttribArray(1);
 
+        // Swap buffers
         glfwSwapBuffers();
+
 
         if (glfwGetKey(GLFW_KEY_ESC) == GLFW_PRESS)
             break;
