@@ -19,6 +19,9 @@
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
                    projectFiles="true">
+      <itemPath>resources/earth_texture_grid.bmp</itemPath>
+      <itemPath>resources/lenna_head.jpg</itemPath>
+      <itemPath>resources/uvtemplate.DDS</itemPath>
     </logicalFolder>
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
@@ -82,6 +85,12 @@
       </item>
       <item path="include/tools.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="resources/earth_texture_grid.bmp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="resources/lenna_head.jpg" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="resources/uvtemplate.DDS" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/camera.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/figures/geom.cpp" ex="false" tool="1" flavor2="0">
@@ -117,6 +126,7 @@
           <standard>8</standard>
           <incDir>
             <pElem>include</pElem>
+            <pElem>/usr/include/ImageMagick</pElem>
           </incDir>
         </ccTool>
         <fortranCompilerTool>
@@ -129,6 +139,7 @@
           <linkerLibItems>
             <linkerOptionItem>`pkg-config --libs glew`</linkerOptionItem>
             <linkerOptionItem>`pkg-config --libs libglfw`</linkerOptionItem>
+            <linkerOptionItem>`pkg-config --libs Magick++`</linkerOptionItem>
           </linkerLibItems>
         </linkerTool>
       </compileType>
@@ -143,6 +154,12 @@
       <item path="include/texture.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/tools.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="resources/earth_texture_grid.bmp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="resources/lenna_head.jpg" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="resources/uvtemplate.DDS" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/camera.cpp" ex="false" tool="1" flavor2="0">
       </item>

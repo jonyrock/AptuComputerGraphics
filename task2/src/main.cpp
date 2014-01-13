@@ -52,7 +52,9 @@ int GLinit() {
 
 }
 
+
 int main(void) {
+
 
     if (GLinit() != 0) {
         return 1;
@@ -74,8 +76,10 @@ int main(void) {
     fillCube(vertices);
 
     // Load the texture using any two methods
-    //GLuint Texture = loadBMP_custom("uvtemplate.bmp");
-    GLuint Texture = loadDDS("resources/uvtemplate.DDS");
+//    GLuint Texture = loadBMP("resources/earth_texture_grid.bmp");
+    GLuint Texture = loadJPEG("resources/lenna_head.jpg");
+    
+//    GLuint Texture = loadDDS("resources/uvtemplate.DDS");
 
     // Get a handle for our "myTextureSampler" uniform
     GLuint TextureID = glGetUniformLocation(programId, "myTextureSampler");
