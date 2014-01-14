@@ -102,9 +102,10 @@ GLuint loadJPEG(const char* filename) {
 
         // Create one OpenGL texture
         GLuint textureID;
+        
         glGenTextures(1, &textureID);
 
-        // "Bind" the newly created texture : all future texture functions will modify this texture
+        // "Bind" the newly created texture: all future texture functions will modify this texture
         glBindTexture(GL_TEXTURE_2D, textureID);
 
         size_t imageSize = image.size().width() * image.size().height() * 3;

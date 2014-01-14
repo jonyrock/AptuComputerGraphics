@@ -1,8 +1,12 @@
 
 #include "figures/textures.h"
 
+#include <iostream>
+
 using namespace std;
 using namespace glm;
+
+
 
 void fillPlaneUV(std::vector<glm::vec2>& vertices) {
 
@@ -36,14 +40,12 @@ void fillSphereUV(std::vector<glm::vec2>& vertices) {
 
     //    cout << "fill sphere" << endl;
 
-    float step = 1;
+    float step = 2;
 
     for (float beta = 0; beta < 360; beta += step) {
         for (float alpha = 0; alpha < 360; alpha += step) {
 
-            float alpha_ = alpha / 360;
-            float beta_ = beta / 360;
-            float step_ = step / 360;
+            
 
             /***********
              * b ---- c
@@ -51,6 +53,18 @@ void fillSphereUV(std::vector<glm::vec2>& vertices) {
              * |      |
              * a ---- d
              * ********/
+            
+            
+            
+            float alpha_ = alpha / 360;
+            float beta_ = beta / 360;
+            float step_ = step / 360;
+            
+//            cout << "(" << alpha_ << ", " << beta_ << "), ";
+//            cout << "(" << alpha_ + step_ << ", " << beta_ << "), ";
+//            cout << "(" << alpha_ + step_ << ", " << beta_ + step_ << "), ";
+//            cout << "(" << alpha_ << ", " << beta_ + step_ << ") ";
+//            cout << endl;
 
             vec2 a(alpha_, beta_);
             vec2 b(alpha_ + step_, beta_);
@@ -58,8 +72,8 @@ void fillSphereUV(std::vector<glm::vec2>& vertices) {
             vec2 d(alpha_, beta_ + step_);
 
             vertices.push_back(a);
-            vertices.push_back(b);
             vertices.push_back(c);
+            vertices.push_back(b);
 
             vertices.push_back(a);
             vertices.push_back(d);

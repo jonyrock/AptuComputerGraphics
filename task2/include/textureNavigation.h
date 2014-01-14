@@ -14,8 +14,8 @@ class TextureNavigation {
 
 public:
 
-    TextureNavigation(GLuint textureID, GLuint textureScaleId)
-    : _textureID(textureID), _textureScaleId(textureScaleId) {
+    TextureNavigation(GLuint textureID_, GLuint textureScaleId_)
+    : _textureID(textureID_), _textureScaleId(textureScaleId_) {
         _ts = 1;
         _filterType = 1;
     }
@@ -34,11 +34,14 @@ public:
 
         setTexturesParam();
     }
-
+    
+    inline void textureId(GLuint textureID_) {
+        _textureID = textureID_;
+    }
+    
 private:
 
     inline void setTexturesParam() {
-
 
         glBindTexture(GL_TEXTURE_2D, _textureID);
 

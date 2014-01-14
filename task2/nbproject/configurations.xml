@@ -29,6 +29,7 @@
                    projectFiles="true">
       <logicalFolder name="figures" displayName="figures" projectFiles="true">
         <itemPath>src/figures/geom.cpp</itemPath>
+        <itemPath>src/figures/newfile</itemPath>
         <itemPath>src/figures/textures.cpp</itemPath>
       </logicalFolder>
       <itemPath>src/camera.cpp</itemPath>
@@ -114,6 +115,8 @@
       </item>
       <item path="src/figures/geom.cpp" ex="false" tool="1" flavor2="0">
       </item>
+      <item path="src/figures/newfile" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/figures/textures.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/main.cpp" ex="false" tool="1" flavor2="0">
@@ -178,6 +181,8 @@
       <item path="src/camera.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/figures/geom.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/figures/newfile" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/figures/textures.cpp" ex="false" tool="1" flavor2="0">
       </item>

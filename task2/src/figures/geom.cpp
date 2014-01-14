@@ -109,10 +109,24 @@ void fillSphere(vector<vec3>& vertices) {
             vec3 b = rotateY(rotateZ(vec3(1, 0, 0), alpha + step), beta);
             vec3 c = rotateY(rotateZ(vec3(1, 0, 0), alpha + step), beta + step);
             vec3 d = rotateY(rotateZ(vec3(1, 0, 0), alpha), beta + step);
+            
+//            print(a); 
+//            cout << " " << alpha << " " << beta;
+//            cout << endl;
+//            print(b);
+//            cout << " " << alpha + step << " " << beta;
+//            cout << endl;
+//            print(c);
+//            cout << " " << alpha + step << " " << beta + step;
+//            cout << endl;
+//            print(d);
+//            cout << " " << alpha << " " << beta + step;
+//            cout << endl;
+//            cout << endl;
 
             vertices.push_back(a);
-            vertices.push_back(b);
             vertices.push_back(c);
+            vertices.push_back(b);
 
             vertices.push_back(a);
             vertices.push_back(d);

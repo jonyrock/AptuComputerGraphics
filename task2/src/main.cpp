@@ -65,17 +65,17 @@ int main(void) {
     // Uniform
     GLuint mvpId = glGetUniformLocation(programId, "MVP");
     GLuint textureScaleId = glGetUniformLocation(programId, "textureScale");
-    GLuint TextureID = glGetUniformLocation(programId, "myTextureSampler");
+//    GLuint TextureID = glGetUniformLocation(programId, "myTextureSampler");
 
     // Attributes
     glUseProgram(programId);
 
-//    GLuint Texture = loadJPEG("resources/lenna_head.jpg");
-    GLuint Texture = loadBMP("resources/earth_texture_grid.bmp");
-    
+    GLuint textureEarth = loadBMP("resources/earth_texture_grid.bmp");
+    GLuint textureLena = loadJPEG("resources/lenna_head.jpg");
+
     // View init
     Camera camera(6, 0, 10);
-    TextureNavigation textureNavigation(TextureID, textureScaleId);
+    TextureNavigation textureNavigation(textureLena, textureScaleId);
 
     // Projection init
     mat4 Model;
@@ -121,7 +121,7 @@ int main(void) {
     glBindBuffer(GL_ARRAY_BUFFER, vertexCubeBufferUV);
     glBufferData(GL_ARRAY_BUFFER, verticesCubeUV.size() * sizeof (vec2), &verticesCubeUV[0], GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
-    
+
     /** SPHERE INIT **/
     vector<vec3> verticesSphere;
     vector<vec2> verticesSphereUV;
@@ -146,6 +146,24 @@ int main(void) {
 
     while (true) {
 
+        if (glfwGetKey('Z') == GLFW_PRESS)
+            figure = 1;
+
+        if (glfwGetKey('X') == GLFW_PRESS)
+            figure = 2;
+
+        if (glfwGetKey('C') == GLFW_PRESS)
+            figure = 3;
+
+        if (figure == 1 || figure == 2) {
+            textureNavigation.textureId(textureLena);
+            cout << "bind lena" << endl;
+        }
+        if (figure == 3) {
+            textureNavigation.textureId(textureEarth);
+            cout << "bind earth" << endl;
+        }
+
         camera.windowsIterate();
         camera.updateView(View);
 
@@ -153,23 +171,11 @@ int main(void) {
 
         MVP = Projection * View * Model;
 
+        // glEnable(GL_CULL_FACE);
+
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glUniformMatrix4fv(mvpId, 1, GL_FALSE, &MVP[0][0]);
 
-        // Bind our texture in Texture Unit 0
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, Texture);
-        // Set our "myTextureSampler" sampler to user Texture Unit 0
-        glUniform1i(TextureID, 0);
-
-        if (glfwGetKey('Z') == GLFW_PRESS)
-            figure = 1;
-
-        if (glfwGetKey('X') == GLFW_PRESS)
-            figure = 2;
-        
-        if (glfwGetKey('C') == GLFW_PRESS)
-            figure = 3;
 
         /** PLANE **/
         if (figure == 1) {
@@ -196,7 +202,7 @@ int main(void) {
 
             glDrawArrays(GL_TRIANGLES, 0, 12 * 3);
         }
-        
+
         /** SPHERE **/
         if (figure == 3) {
             glEnableVertexAttribArray(0);
