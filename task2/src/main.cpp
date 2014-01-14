@@ -70,10 +70,10 @@ int main(void) {
     // Attributes
     glUseProgram(programId);
 
-    GLuint Texture = loadJPEG("resources/lenna_head.jpg");
-
-    // View init
+//    GLuint Texture = loadJPEG("resources/lenna_head.jpg");
+    GLuint Texture = loadBMP("resources/earth_texture_grid.bmp");
     
+    // View init
     Camera camera(6, 0, 10);
     TextureNavigation textureNavigation(TextureID, textureScaleId);
 
@@ -121,10 +121,28 @@ int main(void) {
     glBindBuffer(GL_ARRAY_BUFFER, vertexCubeBufferUV);
     glBufferData(GL_ARRAY_BUFFER, verticesCubeUV.size() * sizeof (vec2), &verticesCubeUV[0], GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
+    
+    /** SPHERE INIT **/
+    vector<vec3> verticesSphere;
+    vector<vec2> verticesSphereUV;
+    fillSphere(verticesSphere);
+    fillSphereUV(verticesSphereUV);
+
+    GLuint vertexSphereBuffer;
+    glGenBuffers(1, &vertexSphereBuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, vertexSphereBuffer);
+    glBufferData(GL_ARRAY_BUFFER, verticesSphere.size() * sizeof (vec3), &verticesSphere[0], GL_STATIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    GLuint vertexSphereBufferUV;
+    glGenBuffers(1, &vertexSphereBufferUV);
+    glBindBuffer(GL_ARRAY_BUFFER, vertexSphereBufferUV);
+    glBufferData(GL_ARRAY_BUFFER, verticesSphereUV.size() * sizeof (vec2), &verticesSphereUV[0], GL_STATIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     glClearColor(0.9f, 0.9f, 0.9f, 0.0f);
 
-    int figure = 2;
+    int figure = 3;
 
     while (true) {
 
@@ -149,6 +167,9 @@ int main(void) {
 
         if (glfwGetKey('X') == GLFW_PRESS)
             figure = 2;
+        
+        if (glfwGetKey('C') == GLFW_PRESS)
+            figure = 3;
 
         /** PLANE **/
         if (figure == 1) {
@@ -174,6 +195,19 @@ int main(void) {
             glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
 
             glDrawArrays(GL_TRIANGLES, 0, 12 * 3);
+        }
+        
+        /** SPHERE **/
+        if (figure == 3) {
+            glEnableVertexAttribArray(0);
+            glBindBuffer(GL_ARRAY_BUFFER, vertexSphereBuffer);
+            glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*) 0);
+
+            glEnableVertexAttribArray(1);
+            glBindBuffer(GL_ARRAY_BUFFER, vertexSphereBufferUV);
+            glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
+
+            glDrawArrays(GL_TRIANGLES, 0, verticesSphere.size() * 3);
         }
 
         glDisableVertexAttribArray(0);

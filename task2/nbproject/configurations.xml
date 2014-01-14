@@ -141,12 +141,17 @@
           <standard>8</standard>
           <incDir>
             <pElem>include</pElem>
-            <pElem>/usr/include</pElem>
+            <pElem>/usr/include/ImageMagick</pElem>
           </incDir>
           <commandLine>-lGLEW -lglfw -lGL</commandLine>
           <useLinkerLibraries>false</useLinkerLibraries>
         </ccTool>
         <linkerTool>
+          <linkerLibItems>
+            <linkerOptionItem>`pkg-config --libs glew`</linkerOptionItem>
+            <linkerOptionItem>`pkg-config --libs libglfw`</linkerOptionItem>
+            <linkerOptionItem>`pkg-config --libs Magick++`</linkerOptionItem>
+          </linkerLibItems>
           <commandLine>-lGLEW -lMagick++</commandLine>
         </linkerTool>
       </compileType>
