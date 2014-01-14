@@ -6,8 +6,6 @@
 using namespace std;
 using namespace glm;
 
-
-
 void fillPlaneUV(std::vector<glm::vec2>& vertices) {
 
     vertices = {
@@ -40,12 +38,10 @@ void fillSphereUV(std::vector<glm::vec2>& vertices) {
 
     //    cout << "fill sphere" << endl;
 
-    float step = 2;
+    float step = 1;
 
     for (float beta = 0; beta < 360; beta += step) {
-        for (float alpha = 0; alpha < 360; alpha += step) {
-
-            
+        for (float alpha = -90; alpha < 90; alpha += step) {
 
             /***********
              * b ---- c
@@ -53,24 +49,18 @@ void fillSphereUV(std::vector<glm::vec2>& vertices) {
              * |      |
              * a ---- d
              * ********/
-            
-            
-            
-            float alpha_ = alpha / 360;
-            float beta_ = beta / 360;
-            float step_ = step / 360;
-            
-//            cout << "(" << alpha_ << ", " << beta_ << "), ";
-//            cout << "(" << alpha_ + step_ << ", " << beta_ << "), ";
-//            cout << "(" << alpha_ + step_ << ", " << beta_ + step_ << "), ";
-//            cout << "(" << alpha_ << ", " << beta_ + step_ << ") ";
-//            cout << endl;
 
-            vec2 a(alpha_, beta_);
-            vec2 b(alpha_ + step_, beta_);
-            vec2 c(alpha_ + step_, beta_ + step_);
-            vec2 d(alpha_, beta_ + step_);
+            float x = beta / 360.0f;
+            float y = (alpha + 90.0f) / 180.0f;
 
+            float offsetX = step / 360.0f;
+            float offsetY = step / 180.0f;
+
+            vec2 a(x, y);
+            vec2 b(x,y + offsetY);
+            vec2 c(x + offsetX, y + offsetY );
+            vec2 d(x + offsetX, y);
+            
             vertices.push_back(a);
             vertices.push_back(c);
             vertices.push_back(b);
@@ -78,6 +68,7 @@ void fillSphereUV(std::vector<glm::vec2>& vertices) {
             vertices.push_back(a);
             vertices.push_back(d);
             vertices.push_back(c);
+            
         }
 
     }

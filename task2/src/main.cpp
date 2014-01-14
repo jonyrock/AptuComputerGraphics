@@ -157,11 +157,9 @@ int main(void) {
 
         if (figure == 1 || figure == 2) {
             textureNavigation.textureId(textureLena);
-            cout << "bind lena" << endl;
         }
         if (figure == 3) {
             textureNavigation.textureId(textureEarth);
-            cout << "bind earth" << endl;
         }
 
         camera.windowsIterate();

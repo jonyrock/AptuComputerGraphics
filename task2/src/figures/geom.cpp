@@ -89,13 +89,11 @@ void fillCube(vector<vec3>& vertices) {
 }
 
 void fillSphere(vector<vec3>& vertices) {
-    cout << "fill sphere" << endl;
+    
     float step = 1;
-
+    
     for (float beta = 0; beta < 360; beta += step) {
-
-        for (float alpha = 0; alpha < 360; alpha += step) {
-
+        for (float alpha = -90; alpha < 90; alpha += step) {
 
             /***********
              * b -----c
@@ -104,26 +102,11 @@ void fillSphere(vector<vec3>& vertices) {
              * a ---- d
              * ********/
 
-
             vec3 a = rotateY(rotateZ(vec3(1, 0, 0), alpha), beta);
             vec3 b = rotateY(rotateZ(vec3(1, 0, 0), alpha + step), beta);
             vec3 c = rotateY(rotateZ(vec3(1, 0, 0), alpha + step), beta + step);
             vec3 d = rotateY(rotateZ(vec3(1, 0, 0), alpha), beta + step);
             
-//            print(a); 
-//            cout << " " << alpha << " " << beta;
-//            cout << endl;
-//            print(b);
-//            cout << " " << alpha + step << " " << beta;
-//            cout << endl;
-//            print(c);
-//            cout << " " << alpha + step << " " << beta + step;
-//            cout << endl;
-//            print(d);
-//            cout << " " << alpha << " " << beta + step;
-//            cout << endl;
-//            cout << endl;
-
             vertices.push_back(a);
             vertices.push_back(c);
             vertices.push_back(b);
