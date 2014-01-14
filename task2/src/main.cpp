@@ -70,24 +70,21 @@ int main(void) {
     // Attributes
     glUseProgram(programId);
 
-    // Model init
-    mat4 Model;
-
-
     GLuint Texture = loadJPEG("resources/lenna_head.jpg");
 
     // View init
-    mat4 View;
+    
     Camera camera(6, 0, 10);
     TextureNavigation textureNavigation(TextureID, textureScaleId);
 
     // Projection init
+    mat4 Model;
+    mat4 View;
     float NEAR_CLIPPING_PLANE = 0.1f;
     float FAR_CLIPPING_PLANE = 100.0f;
     mat4 Projection = perspective(45.0f, 4.0f / 3.0f, NEAR_CLIPPING_PLANE, FAR_CLIPPING_PLANE);
 
     mat4 MVP;
-
 
     /** PLANE INIT **/
     vector<vec3> verticesPlane;
@@ -122,7 +119,7 @@ int main(void) {
     GLuint vertexCubeBufferUV;
     glGenBuffers(1, &vertexCubeBufferUV);
     glBindBuffer(GL_ARRAY_BUFFER, vertexCubeBufferUV);
-    glBufferData(GL_ARRAY_BUFFER, verticesCubeUV.size() * sizeof (vec2), &verticesPlaneUV[0], GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, verticesCubeUV.size() * sizeof (vec2), &verticesCubeUV[0], GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     glClearColor(0.9f, 0.9f, 0.9f, 0.0f);
@@ -146,7 +143,6 @@ int main(void) {
         glBindTexture(GL_TEXTURE_2D, Texture);
         // Set our "myTextureSampler" sampler to user Texture Unit 0
         glUniform1i(TextureID, 0);
-
 
         if (glfwGetKey('Z') == GLFW_PRESS)
             figure = 1;
@@ -177,7 +173,7 @@ int main(void) {
             glBindBuffer(GL_ARRAY_BUFFER, vertexCubeBufferUV);
             glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
 
-            glDrawArrays(GL_TRIANGLES, 0, 4 * 3);
+            glDrawArrays(GL_TRIANGLES, 0, 12 * 3);
         }
 
         glDisableVertexAttribArray(0);
