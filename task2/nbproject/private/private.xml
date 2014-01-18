@@ -5,4 +5,14 @@
         <activeConfIndexElem>0</activeConfIndexElem>
     </data>
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
+        <file>file:/home/jjxx/Desktop/AptuComputerGraphics/task2/src/main.cpp</file>
+        <file>file:/home/jjxx/Desktop/AptuComputerGraphics/task2/include/camera.h</file>
+        <file>file:/home/jjxx/Desktop/AptuComputerGraphics/task2/include/figures/textures.h</file>
+        <file>file:/home/jjxx/Desktop/AptuComputerGraphics/task2/src/simple.vert</file>
+        <file>file:/home/jjxx/Desktop/AptuComputerGraphics/task2/src/simple.frag</file>
+        <file>file:/home/jjxx/Desktop/AptuComputerGraphics/task2/src/figures/textures.cpp</file>
+        <file>file:/home/jjxx/Desktop/AptuComputerGraphics/task2/src/texture.cpp</file>
+        <file>file:/home/jjxx/Desktop/AptuComputerGraphics/task2/src/figures/geom.cpp</file>
+    </open-files>
 </project-private>

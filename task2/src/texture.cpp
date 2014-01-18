@@ -10,7 +10,6 @@
 #include <Magick++/Geometry.h>
 #include <iostream>
 
-
 using namespace Magick;
 using namespace std;
 

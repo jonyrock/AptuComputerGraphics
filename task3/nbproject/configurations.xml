@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="89">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="docs" displayName="docs" projectFiles="true">
+      <itemPath>todo.txt</itemPath>
+    </logicalFolder>
+    <logicalFolder name="HeaderFiles"
+                   displayName="Header Files"
+                   projectFiles="true">
+      <logicalFolder name="figures" displayName="figures" projectFiles="true">
+        <itemPath>include/figures/geom.h</itemPath>
+        <itemPath>include/figures/textures.h</itemPath>
+      </logicalFolder>
+      <itemPath>include/camera.h</itemPath>
+      <itemPath>include/lightNavigation.h</itemPath>
+      <itemPath>include/shader.h</itemPath>
+      <itemPath>include/tiny_obj_loader.h</itemPath>
+      <itemPath>include/tools.h</itemPath>
+    </logicalFolder>
+    <logicalFolder name="ResourceFiles"
+                   displayName="Resource Files"
+                   projectFiles="true">
+      <itemPath>resources/bunny_n.obj</itemPath>
+    </logicalFolder>
+    <logicalFolder name="SourceFiles"
+                   displayName="Source Files"
+                   projectFiles="true">
+      <logicalFolder name="figures" displayName="figures" projectFiles="true">
+        <itemPath>src/figures/geom.cpp</itemPath>
+        <itemPath>src/figures/newfile</itemPath>
+        <itemPath>src/figures/textures.cpp</itemPath>
+      </logicalFolder>
+      <itemPath>src/camera.cpp</itemPath>
+      <itemPath>src/main.cpp</itemPath>
+      <itemPath>src/shader.cpp</itemPath>
+      <itemPath>src/simple.frag</itemPath>
+      <itemPath>src/simple.vert</itemPath>
+      <itemPath>src/tiny_obj_loader.cc</itemPath>
+    </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Test Files"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+      <itemPath>docs/tasks.txt</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceRootList>
+    <Elem>.</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Release" type="1">
+      <toolsSet>
+        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <developmentMode>5</developmentMode>
+        </cTool>
+        <ccTool>
+          <developmentMode>5</developmentMode>
+          <standard>8</standard>
+          <incDir>
+            <pElem>include</pElem>
+            <pElem>/usr/include/ImageMagick</pElem>
+          </incDir>
+        </ccTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <asmTool>
+          <developmentMode>5</developmentMode>
+        </asmTool>
+        <linkerTool>
+          <linkerLibItems>
+            <linkerOptionItem>`pkg-config --libs glew`</linkerOptionItem>
+            <linkerOptionItem>`pkg-config --libs libglfw`</linkerOptionItem>
+            <linkerOptionItem>`pkg-config --libs Magick++`</linkerOptionItem>
+          </linkerLibItems>
+          <commandLine>-lGLEW -lMagick++ -lGL -lglfw</commandLine>
+        </linkerTool>
+      </compileType>
+      <item path="include/camera.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/figures/geom.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/figures/textures.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/lightNavigation.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/shader.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/tiny_obj_loader.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/tools.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="resources/bunny_n.obj" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/camera.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/figures/geom.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/figures/newfile" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/figures/textures.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/shader.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/simple.frag" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/simple.vert" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/tiny_obj_loader.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="todo.txt" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
+    <conf name="Debug" type="1">
+      <toolsSet>
+        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <ccTool>
+          <standard>8</standard>
+          <incDir>
+            <pElem>include</pElem>
+            <pElem>/usr/include/ImageMagick</pElem>
+          </incDir>
+          <commandLine>-lGLEW -lglfw -lGL</commandLine>
+          <useLinkerLibraries>false</useLinkerLibraries>
+        </ccTool>
+        <linkerTool>
+          <linkerLibItems>
+            <linkerOptionItem>`pkg-config --libs glew`</linkerOptionItem>
+            <linkerOptionItem>`pkg-config --libs libglfw`</linkerOptionItem>
+            <linkerOptionItem>`pkg-config --libs Magick++`</linkerOptionItem>
+          </linkerLibItems>
+          <commandLine>-lGLEW -lMagick++</commandLine>
+        </linkerTool>
+      </compileType>
+      <item path="include/camera.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/figures/geom.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/figures/textures.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/lightNavigation.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/shader.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/tiny_obj_loader.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/tools.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="resources/bunny_n.obj" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/camera.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/figures/geom.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/figures/newfile" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/figures/textures.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/shader.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/simple.frag" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/simple.vert" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/tiny_obj_loader.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="todo.txt" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>
