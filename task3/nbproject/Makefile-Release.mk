@@ -39,8 +39,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/figures/geom.o \
 	${OBJECTDIR}/src/figures/textures.o \
 	${OBJECTDIR}/src/main.o \
-	${OBJECTDIR}/src/shader.o \
-	${OBJECTDIR}/src/tiny_obj_loader.o
+	${OBJECTDIR}/src/objloader.o \
+	${OBJECTDIR}/src/shader.o
 
 
 # C Compiler Flags
@@ -57,7 +57,7 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=`pkg-config --libs glew` `pkg-config --libs libglfw` `pkg-config --libs Magick++`  
+LDLIBSOPTIONS=`pkg-config --libs glew` `pkg-config --libs libglfw`  
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
@@ -65,37 +65,37 @@ LDLIBSOPTIONS=`pkg-config --libs glew` `pkg-config --libs libglfw` `pkg-config -
 
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/task3: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/task3 ${OBJECTFILES} ${LDLIBSOPTIONS} -lGLEW -lMagick++ -lGL -lglfw
+	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/task3 ${OBJECTFILES} ${LDLIBSOPTIONS} -lGLEW -lGL -lglfw
 
 ${OBJECTDIR}/src/camera.o: src/camera.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -I/usr/include/ImageMagick `pkg-config --cflags glew` `pkg-config --cflags libglfw` `pkg-config --cflags Magick++` -std=c++11  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/camera.o src/camera.cpp
+	$(COMPILE.cc) -O2 -Iinclude -I/usr/include/ImageMagick `pkg-config --cflags glew` `pkg-config --cflags libglfw` -std=c++11  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/camera.o src/camera.cpp
 
 ${OBJECTDIR}/src/figures/geom.o: src/figures/geom.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/figures
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -I/usr/include/ImageMagick `pkg-config --cflags glew` `pkg-config --cflags libglfw` `pkg-config --cflags Magick++` -std=c++11  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/figures/geom.o src/figures/geom.cpp
+	$(COMPILE.cc) -O2 -Iinclude -I/usr/include/ImageMagick `pkg-config --cflags glew` `pkg-config --cflags libglfw` -std=c++11  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/figures/geom.o src/figures/geom.cpp
 
 ${OBJECTDIR}/src/figures/textures.o: src/figures/textures.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/figures
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -I/usr/include/ImageMagick `pkg-config --cflags glew` `pkg-config --cflags libglfw` `pkg-config --cflags Magick++` -std=c++11  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/figures/textures.o src/figures/textures.cpp
+	$(COMPILE.cc) -O2 -Iinclude -I/usr/include/ImageMagick `pkg-config --cflags glew` `pkg-config --cflags libglfw` -std=c++11  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/figures/textures.o src/figures/textures.cpp
 
 ${OBJECTDIR}/src/main.o: src/main.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -I/usr/include/ImageMagick `pkg-config --cflags glew` `pkg-config --cflags libglfw` `pkg-config --cflags Magick++` -std=c++11  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/main.o src/main.cpp
+	$(COMPILE.cc) -O2 -Iinclude -I/usr/include/ImageMagick `pkg-config --cflags glew` `pkg-config --cflags libglfw` -std=c++11  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/main.o src/main.cpp
+
+${OBJECTDIR}/src/objloader.o: src/objloader.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -Iinclude -I/usr/include/ImageMagick `pkg-config --cflags glew` `pkg-config --cflags libglfw` -std=c++11  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/objloader.o src/objloader.cpp
 
 ${OBJECTDIR}/src/shader.o: src/shader.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -I/usr/include/ImageMagick `pkg-config --cflags glew` `pkg-config --cflags libglfw` `pkg-config --cflags Magick++` -std=c++11  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/shader.o src/shader.cpp
-
-${OBJECTDIR}/src/tiny_obj_loader.o: src/tiny_obj_loader.cc 
-	${MKDIR} -p ${OBJECTDIR}/src
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -I/usr/include/ImageMagick `pkg-config --cflags glew` `pkg-config --cflags libglfw` `pkg-config --cflags Magick++` -std=c++11  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/tiny_obj_loader.o src/tiny_obj_loader.cc
+	$(COMPILE.cc) -O2 -Iinclude -I/usr/include/ImageMagick `pkg-config --cflags glew` `pkg-config --cflags libglfw` -std=c++11  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/shader.o src/shader.cpp
 
 # Subprojects
 .build-subprojects:

@@ -39,8 +39,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/figures/geom.o \
 	${OBJECTDIR}/src/figures/textures.o \
 	${OBJECTDIR}/src/main.o \
-	${OBJECTDIR}/src/shader.o \
-	${OBJECTDIR}/src/tiny_obj_loader.o
+	${OBJECTDIR}/src/objloader.o \
+	${OBJECTDIR}/src/shader.o
 
 
 # C Compiler Flags
@@ -87,15 +87,15 @@ ${OBJECTDIR}/src/main.o: src/main.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -I/usr/include/ImageMagick -std=c++11 -lGLEW -lglfw -lGL -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/main.o src/main.cpp
 
+${OBJECTDIR}/src/objloader.o: src/objloader.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude -I/usr/include/ImageMagick -std=c++11 -lGLEW -lglfw -lGL -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/objloader.o src/objloader.cpp
+
 ${OBJECTDIR}/src/shader.o: src/shader.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -I/usr/include/ImageMagick -std=c++11 -lGLEW -lglfw -lGL -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/shader.o src/shader.cpp
-
-${OBJECTDIR}/src/tiny_obj_loader.o: src/tiny_obj_loader.cc 
-	${MKDIR} -p ${OBJECTDIR}/src
-	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -I/usr/include/ImageMagick -std=c++11 -lGLEW -lglfw -lGL -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/tiny_obj_loader.o src/tiny_obj_loader.cc
 
 # Subprojects
 .build-subprojects:

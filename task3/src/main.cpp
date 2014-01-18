@@ -1,4 +1,4 @@
-#include "tiny_obj_loader.h"
+#include "objloader.h"
 #include "shader.h"
 
 #include "figures/geom.h"
@@ -99,17 +99,11 @@ int main(void) {
 
     /** RABBIT INIT **/
     vector<vec3> rabbitVertices;
-    vector<vec2> rabbitUVs;
     vector<vec3> rabbitNormals;
 
-    vector<tinyobj::shape_t> shapes;
-    std::string err = tinyobj::LoadObj(shapes, "resources/bunny_n.obj");
-    if (!err.empty()) {
-        std::cerr << err << std::endl;
-        return false;
+    if(!loadOBJ("recourses/my_rabbit_n.obj", rabbitVertices, rabbitNormals)){
+        return -1;
     }
-    
-    std::cout << "# of shapes : " << shapes.size() << std::endl;
 
     GLuint rabbitVertecesBuffer;
     glGenBuffers(1, &rabbitVertecesBuffer);

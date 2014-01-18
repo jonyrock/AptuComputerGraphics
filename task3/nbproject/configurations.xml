@@ -13,14 +13,14 @@
       </logicalFolder>
       <itemPath>include/camera.h</itemPath>
       <itemPath>include/lightNavigation.h</itemPath>
+      <itemPath>include/objloader.h</itemPath>
       <itemPath>include/shader.h</itemPath>
-      <itemPath>include/tiny_obj_loader.h</itemPath>
       <itemPath>include/tools.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
                    projectFiles="true">
-      <itemPath>resources/bunny_n.obj</itemPath>
+      <itemPath>resources/my_rabbit_n.obj</itemPath>
     </logicalFolder>
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
@@ -32,10 +32,10 @@
       </logicalFolder>
       <itemPath>src/camera.cpp</itemPath>
       <itemPath>src/main.cpp</itemPath>
+      <itemPath>src/objloader.cpp</itemPath>
       <itemPath>src/shader.cpp</itemPath>
       <itemPath>src/simple.frag</itemPath>
       <itemPath>src/simple.vert</itemPath>
-      <itemPath>src/tiny_obj_loader.cc</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -84,9 +84,8 @@
           <linkerLibItems>
             <linkerOptionItem>`pkg-config --libs glew`</linkerOptionItem>
             <linkerOptionItem>`pkg-config --libs libglfw`</linkerOptionItem>
-            <linkerOptionItem>`pkg-config --libs Magick++`</linkerOptionItem>
           </linkerLibItems>
-          <commandLine>-lGLEW -lMagick++ -lGL -lglfw</commandLine>
+          <commandLine>-lGLEW -lGL -lglfw</commandLine>
         </linkerTool>
       </compileType>
       <item path="include/camera.h" ex="false" tool="3" flavor2="0">
@@ -97,13 +96,13 @@
       </item>
       <item path="include/lightNavigation.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="include/shader.h" ex="false" tool="3" flavor2="0">
+      <item path="include/objloader.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="include/tiny_obj_loader.h" ex="false" tool="3" flavor2="0">
+      <item path="include/shader.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/tools.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="resources/bunny_n.obj" ex="false" tool="3" flavor2="0">
+      <item path="resources/my_rabbit_n.obj" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/camera.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -115,13 +114,13 @@
       </item>
       <item path="src/main.cpp" ex="false" tool="1" flavor2="0">
       </item>
+      <item path="src/objloader.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="src/shader.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/simple.frag" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/simple.vert" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/tiny_obj_loader.cc" ex="false" tool="1" flavor2="0">
       </item>
       <item path="todo.txt" ex="false" tool="3" flavor2="0">
       </item>
@@ -160,13 +159,13 @@
       </item>
       <item path="include/lightNavigation.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="include/shader.h" ex="false" tool="3" flavor2="0">
+      <item path="include/objloader.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="include/tiny_obj_loader.h" ex="false" tool="3" flavor2="0">
+      <item path="include/shader.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/tools.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="resources/bunny_n.obj" ex="false" tool="3" flavor2="0">
+      <item path="resources/my_rabbit_n.obj" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/camera.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -178,13 +177,13 @@
       </item>
       <item path="src/main.cpp" ex="false" tool="1" flavor2="0">
       </item>
+      <item path="src/objloader.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="src/shader.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/simple.frag" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/simple.vert" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/tiny_obj_loader.cc" ex="false" tool="1" flavor2="0">
       </item>
       <item path="todo.txt" ex="false" tool="3" flavor2="0">
       </item>
