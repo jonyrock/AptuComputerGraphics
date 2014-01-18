@@ -9,6 +9,8 @@ out vec3 color;
 // Values that stay constant for the whole mesh.
 uniform mat4 MVP;
 uniform vec3 vertexColor;
+uniform float ambient;
+uniform float diffuse;
 
 out vec3 fragmentColor;
 
