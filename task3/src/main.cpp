@@ -149,7 +149,7 @@ int main(void) {
         glUniformMatrix4fv(mvId, 1, GL_FALSE, &MV[0][0]);
 
         /** PLANE **/
-        glUniform3f(colorId, 1.0, 1.0, 1.0);
+        glUniform3f(colorId, 0.9f, 0.9f, 0.9f);
         glEnableVertexAttribArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, planeVerticesBuffer);
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*) 0);

@@ -10,8 +10,7 @@ uniform mat4 MVP;
 uniform mat4 MV;
 uniform mat4 M; // always id
 uniform vec3 vertexColor;
-uniform float ambient;
-uniform float diffuse;
+
 
 out vec3 fragmentColor;
 out vec3 fragmentNormal;
