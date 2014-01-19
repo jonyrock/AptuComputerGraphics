@@ -26,10 +26,10 @@ public:
 
     LightNavigation(GLuint programId)
     : _programId(programId) {
-        _ambient = 0.4f;
-        _diffuse = 0.4f;
-        _specular = 0.3f;
-        _specular_power = 0.3f;
+        _ambient = 0.3f;
+        _diffuse = 0.5f;
+        _specular = 0.8f;
+        _specular_power = 1.98f;
 
         _ambientId = glGetUniformLocation(programId, "ambient");
         _diffuseId = glGetUniformLocation(programId, "diffuse");
@@ -74,7 +74,6 @@ private:
         if (_specular_power < 0)
             _specular_power = 0;
 
-        cout << _specular_power  << endl;
         glUniform1f(_ambientId, _ambient);
         glUniform1f(_diffuseId, _diffuse);
         glUniform1f(_specularId, _specular);

@@ -15,13 +15,11 @@ out vec3 color;
 
 void main() {
     
-
-
     vec3 lightPos = vec3(100.0f, 100.0f, 100.0f);
 
     vec3 L = normalize(lightPos - fragmentPos);
     vec3 V = normalize(fviewerPos - fragmentPos);
-    vec3 R = 2 * dot(fragmentNormal, L) * fragmentNormal - L;
+    vec3 R = -(2 * dot(fragmentNormal, L) * fragmentNormal - L);
 
     
     float idiff = diffuse * max(dot(fragmentNormal, L), 0.0f);
@@ -31,7 +29,7 @@ void main() {
 
     float ires = ambient + idiff + ispec;
     // float ires = max(dot(fragmentNormal, fviewerPos), 0.0f);
-    // color = ires * fragmentColor;
-    color = fragmentNormal;
+    color = ires * fragmentColor;
+    // color = fragmentPos;
 
 }

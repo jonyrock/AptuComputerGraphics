@@ -42,7 +42,7 @@ int GLinit() {
         return -1;
     }
 
-    glfwSetWindowTitle("Geometry party");
+    glfwSetWindowTitle("Bunny party");
     glfwEnable(GLFW_STICKY_KEYS);
 
     glEnable(GL_DEPTH_TEST);
@@ -72,7 +72,7 @@ int main(void) {
     glUseProgram(programId);
 
     // View init
-    Camera camera(0, 10, 6);
+    Camera camera(0, 10, 12);
     LightNavigation lightNavigation(programId);
 
     // Projection init
@@ -94,8 +94,7 @@ int main(void) {
         auto mv = planeModel * vec4(planeVertives[i], 1.f);
         planeVertives[i] = vec3(mv[0], mv[1], mv[2]);
     }
-    planeNormals.push_back(vec3(1, 1, 0));
-    for (int i = 0; i < planeVertives.size() - 1; i++) {
+    for (int i = 0; i < planeVertives.size(); i++) {
         planeNormals.push_back(vec3(0, 1, 0));
     }
 

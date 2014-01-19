@@ -20,7 +20,7 @@
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
                    projectFiles="true">
-      <itemPath>resources/my_rabbit_n.obj</itemPath>
+      <itemPath>resources/bunny_n.obj</itemPath>
     </logicalFolder>
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
@@ -102,7 +102,7 @@
       </item>
       <item path="include/tools.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="resources/my_rabbit_n.obj" ex="false" tool="3" flavor2="0">
+      <item path="resources/bunny_n.obj" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/camera.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -165,7 +165,7 @@
       </item>
       <item path="include/tools.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="resources/my_rabbit_n.obj" ex="false" tool="3" flavor2="0">
+      <item path="resources/bunny_n.obj" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/camera.cpp" ex="false" tool="1" flavor2="0">
       </item>
