@@ -66,6 +66,7 @@ int main(void) {
     GLuint mvpId = glGetUniformLocation(programId, "MVP");
     GLuint mvId = glGetUniformLocation(programId, "MV");
     GLuint colorId = glGetUniformLocation(programId, "vertexColor");
+    GLuint viewerPosId = glGetUniformLocation(programId, "viewerPos");
 
     // Attributes
     glUseProgram(programId);
@@ -147,6 +148,9 @@ int main(void) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glUniformMatrix4fv(mvpId, 1, GL_FALSE, &MVP[0][0]);
         glUniformMatrix4fv(mvId, 1, GL_FALSE, &MV[0][0]);
+        
+        vec3 viewerPos = camera.viewerPos();
+        glUniform3f(viewerPosId, viewerPos.x, viewerPos.y, viewerPos.z); 
 
         /** PLANE **/
         glUniform3f(colorId, 0.9f, 0.9f, 0.9f);

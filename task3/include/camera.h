@@ -62,6 +62,15 @@ public:
             return;
          _heading += deg / 5.0f;
     }
+    
+    inline vec3 viewerPos() const {
+        
+        vec4 res = vec4(_cameraPosition, 1);
+        res = rotate(mat4(1.0f), -_heading, vec3(1, 0, 0)) * res;
+        res = rotate(mat4(1.0f), -_pitch, vec3(0, 1, 0)) * res;
+        return vec3(res.x, res.y, res.z);
+        
+    }
 
     void windowsIterate();
 
