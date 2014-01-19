@@ -85,11 +85,15 @@ int main(void) {
 
     /** PLANE INIT **/
     vector<vec3> planeVertives;
+    vector<vec3> planeNormals;
     fillPlane(planeVertives);
     mat4 planeModel = rotate(mat4(10.0f), 90.f, vec3(1, 0, 0));
     for (int i = 0; i < planeVertives.size(); i++) {
         auto mv = planeModel * vec4(planeVertives[i], 1.f);
         planeVertives[i] = vec3(mv[0], mv[1], mv[2]);
+    }
+    for (int i = 0; i < planeVertives.size(); i++) {
+        planeNormals.push_back(vec3(0, 1, 0));
     }
 
 
@@ -98,6 +102,11 @@ int main(void) {
     glBindBuffer(GL_ARRAY_BUFFER, planeVerticesBuffer);
     glBufferData(GL_ARRAY_BUFFER, planeVertives.size() * sizeof (vec3), &planeVertives[0], GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
+    
+    GLuint planeNormalsBuffer;
+    glGenBuffers(1, &planeNormalsBuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, planeNormalsBuffer);
+    glBufferData(GL_ARRAY_BUFFER, planeNormals.size() * sizeof (vec3), &planeNormals[0], GL_STATIC_DRAW);
 
 
     /** RABBIT INIT **/
@@ -119,11 +128,11 @@ int main(void) {
     glBindBuffer(GL_ARRAY_BUFFER, rabbitVertecesBuffer);
     glBufferData(GL_ARRAY_BUFFER, rabbitVertices.size() * sizeof (vec3), &rabbitVertices[0], GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
-    
+
     GLuint rabbitNormalsBuffer;
     glGenBuffers(1, &rabbitNormalsBuffer);
     glBindBuffer(GL_ARRAY_BUFFER, rabbitNormalsBuffer);
-    glBufferData(GL_ARRAY_BUFFER, rabbitNormals.size() * sizeof(vec3), &rabbitNormals[0], GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, rabbitNormals.size() * sizeof (vec3), &rabbitNormals[0], GL_STATIC_DRAW);
 
     glClearColor(0.9f, 0.9f, 0.9f, 0.0f);
 
@@ -144,6 +153,11 @@ int main(void) {
         glEnableVertexAttribArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, planeVerticesBuffer);
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*) 0);
+        
+        glEnableVertexAttribArray(1);
+        glBindBuffer(GL_ARRAY_BUFFER, planeNormalsBuffer);
+        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void*) 0);
+        
         glDrawArrays(GL_TRIANGLES, 0, 2 * 3);
 
 
@@ -152,11 +166,11 @@ int main(void) {
         glEnableVertexAttribArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, rabbitVertecesBuffer);
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*) 0);
-        
+
         glEnableVertexAttribArray(1);
         glBindBuffer(GL_ARRAY_BUFFER, rabbitNormalsBuffer);
         glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void*) 0);
-        
+
         glDrawArrays(GL_TRIANGLES, 0, rabbitVertices.size() * 3);
 
 

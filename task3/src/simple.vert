@@ -21,6 +21,6 @@ void main() {
     gl_Position =  MVP * vec4(vertexPosition_modelspace, 1);
     fragmentPos = vertexPosition_modelspace;
     fragmentColor = vertexColor;
-    fragmentNormal = normalize(vec4(vertexNormal_modelspace,1)).xyz;
+    fragmentNormal = normalize(vertexNormal_modelspace);
 }
 
