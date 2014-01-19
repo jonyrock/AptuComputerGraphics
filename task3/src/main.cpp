@@ -73,6 +73,7 @@ int main(void) {
 
     // View init
     Camera camera(0, 10, 10);
+    LightNavigation lightNavigation(programId);
 
     // Projection init
     mat4 Model;
@@ -141,6 +142,8 @@ int main(void) {
 
         camera.windowsIterate();
         camera.updateView(View);
+        
+        lightNavigation.windowsIterate();
 
         MVP = Projection * View * Model;
         MV = View * Model;
