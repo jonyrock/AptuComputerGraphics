@@ -15,6 +15,7 @@
 
 #include <iostream>
 #include <vector>
+#include <glm/gtx/transform.hpp>
 
 using namespace std;
 using namespace glm;
@@ -63,6 +64,7 @@ int main(void) {
 
     // Uniform
     GLuint mvpId = glGetUniformLocation(programId, "MVP");
+    GLuint mvId = glGetUniformLocation(programId, "MV");
     GLuint colorId = glGetUniformLocation(programId, "vertexColor");
 
     // Attributes
@@ -79,6 +81,7 @@ int main(void) {
     mat4 Projection = perspective(45.0f, 4.0f / 3.0f, NEAR_CLIPPING_PLANE, FAR_CLIPPING_PLANE);
 
     mat4 MVP;
+    mat4 MV;
 
     /** PLANE INIT **/
     vector<vec3> planeVertives;
@@ -101,8 +104,14 @@ int main(void) {
     vector<vec3> rabbitVertices;
     vector<vec3> rabbitNormals;
 
-    if(!loadOBJ("recourses/my_rabbit_n.obj", rabbitVertices, rabbitNormals)){
+    if (!loadOBJ("resources/my_rabbit_n.obj", rabbitVertices, rabbitNormals)) {
         return -1;
+    }
+
+    mat4 rabbitModel = mat4(30.0f);
+    for (int i = 0; i < rabbitVertices.size(); i++) {
+        auto mv = rabbitModel * vec4(rabbitVertices[i], 1.f);
+        rabbitVertices[i] = vec3(mv[0], mv[1], mv[2]);
     }
 
     GLuint rabbitVertecesBuffer;
@@ -110,9 +119,13 @@ int main(void) {
     glBindBuffer(GL_ARRAY_BUFFER, rabbitVertecesBuffer);
     glBufferData(GL_ARRAY_BUFFER, rabbitVertices.size() * sizeof (vec3), &rabbitVertices[0], GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
+    
+    GLuint rabbitNormalsBuffer;
+    glGenBuffers(1, &rabbitNormalsBuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, rabbitNormalsBuffer);
+    glBufferData(GL_ARRAY_BUFFER, rabbitNormals.size() * sizeof(vec3), &rabbitNormals[0], GL_STATIC_DRAW);
 
     glClearColor(0.9f, 0.9f, 0.9f, 0.0f);
-
 
     while (true) {
 
@@ -120,9 +133,11 @@ int main(void) {
         camera.updateView(View);
 
         MVP = Projection * View * Model;
+        MV = View * Model;
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glUniformMatrix4fv(mvpId, 1, GL_FALSE, &MVP[0][0]);
+        glUniformMatrix4fv(mvId, 1, GL_FALSE, &MV[0][0]);
 
         /** PLANE **/
         glUniform3f(colorId, 1.0, 1.0, 1.0);
@@ -133,10 +148,15 @@ int main(void) {
 
 
         /** RABBIT **/
-        glUniform3f(colorId, .5f, .5f, .5f);
+        glUniform3f(colorId, 184.f / 255, 47.f / 255, 196.f / 255);
         glEnableVertexAttribArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, rabbitVertecesBuffer);
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*) 0);
+        
+        glEnableVertexAttribArray(1);
+        glBindBuffer(GL_ARRAY_BUFFER, rabbitNormalsBuffer);
+        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void*) 0);
+        
         glDrawArrays(GL_TRIANGLES, 0, rabbitVertices.size() * 3);
 
 

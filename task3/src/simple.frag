@@ -2,11 +2,11 @@
 
 // Interpolated values from the vertex shaders
 in vec3 fragmentColor;
+in vec3 fragmentNormal;
+in vec3 fragmentPos;
 
-// Ouput data
 out vec3 color;
 
 void main() {
-    // Output color = color of the texture at the specified UV
-    color = fragmentColor;
+    color = normalize(fragmentNormal);
 }
