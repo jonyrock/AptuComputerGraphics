@@ -31,6 +31,7 @@ void main() {
 
     float ires = ambient + idiff + ispec;
     // float ires = max(dot(fragmentNormal, fviewerPos), 0.0f);
-    color = ires * fragmentColor;
+    // color = ires * fragmentColor;
+    color = fragmentNormal;
 
 }

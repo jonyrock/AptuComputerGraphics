@@ -54,10 +54,10 @@ public:
         if (glfwGetKey('N') == GLFW_PRESS)
             _specular += 0.05;
 
-        if (glfwGetKey('M') == GLFW_PRESS)
-            _specular_power -= 0.02;
         if (glfwGetKey(',') == GLFW_PRESS)
-            _specular_power += 0.02;
+            _specular_power -= 0.01;
+        if (glfwGetKey('.') == GLFW_PRESS)
+            _specular_power += 0.01;
 
         updateParams();
     }

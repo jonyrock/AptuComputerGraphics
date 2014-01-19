@@ -10,6 +10,7 @@ using namespace glm;
 class Camera {
 private:
     vec3 _cameraPosition;
+    vec3 _initPosition;
     int _xBefore;
     int _yBefore;
     int _wheelBefore;
@@ -22,6 +23,7 @@ private:
         _wheelBefore = 0;
         _heading = 0;
         _pitch = 0;
+        _initPosition = _cameraPosition;
     }
 
 public:
@@ -38,6 +40,8 @@ public:
         view = lookAt(_cameraPosition, vec3(0, 0, 0), vec3(0, 1, 0));
         view = view * rotate(mat4(1.0f), -_heading, vec3(1, 0, 0));
         view = view * rotate(mat4(1.0f), -_pitch, vec3(0, 1, 0));
+        
+//        view = mat4();
     }
 
     inline void zoom(float scale = 1) {
@@ -65,7 +69,7 @@ public:
     
     inline vec3 viewerPos() const {
         
-        vec4 res = vec4(_cameraPosition, 1);
+        vec4 res = vec4(_initPosition, 1);
         res = rotate(mat4(1.0f), -_heading, vec3(1, 0, 0)) * res;
         res = rotate(mat4(1.0f), -_pitch, vec3(0, 1, 0)) * res;
         return vec3(res.x, res.y, res.z);

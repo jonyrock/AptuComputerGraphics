@@ -72,7 +72,7 @@ int main(void) {
     glUseProgram(programId);
 
     // View init
-    Camera camera(0, 10, 10);
+    Camera camera(0, 10, 6);
     LightNavigation lightNavigation(programId);
 
     // Projection init
@@ -94,7 +94,8 @@ int main(void) {
         auto mv = planeModel * vec4(planeVertives[i], 1.f);
         planeVertives[i] = vec3(mv[0], mv[1], mv[2]);
     }
-    for (int i = 0; i < planeVertives.size(); i++) {
+    planeNormals.push_back(vec3(1, 1, 0));
+    for (int i = 0; i < planeVertives.size() - 1; i++) {
         planeNormals.push_back(vec3(0, 1, 0));
     }
 
@@ -115,7 +116,7 @@ int main(void) {
     vector<vec3> rabbitVertices;
     vector<vec3> rabbitNormals;
 
-    if (!loadOBJ("resources/my_rabbit_n.obj", rabbitVertices, rabbitNormals)) {
+    if (!loadOBJ("resources/bunny_n.obj", rabbitVertices, rabbitNormals)) {
         return -1;
     }
 
