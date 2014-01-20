@@ -21,7 +21,8 @@ out vec3 color;
 
 void main() {
     
-    vec3 lightColor = vec3(1.0f, 235.0f/255, 30.f/255);
+    //vec3 lightColor = vec3(1.0f, 235.0f/255, 30.f/255);
+    vec3 lightColor = vec3(1.0f, 0.98f, 0.90f);
     vec3 lightPos = vec3(30.0f, 30.0f, 20.0f);
     
     vec3 N = fragmentNormal;
